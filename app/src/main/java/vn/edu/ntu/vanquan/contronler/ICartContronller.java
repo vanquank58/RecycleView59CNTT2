@@ -6,5 +6,5 @@ import vn.edu.ntu.vanquan.model.Product;
 
 public interface ICartContronller
 {
-    List<Product> getALlProduct();
+      List<Product> getALlProduct();
 }

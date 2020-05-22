@@ -21,6 +21,6 @@ public class CartContronller extends Application implements ICartContronller
     }
     @Override
     public List<Product> getALlProduct() {
-        return null;
+        return productsList;
     }
 }

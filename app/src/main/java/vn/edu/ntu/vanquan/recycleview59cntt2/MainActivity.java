@@ -2,6 +2,7 @@ package vn.edu.ntu.vanquan.recycleview59cntt2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,15 +14,30 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import vn.edu.ntu.vanquan.contronler.ICartContronller;
 import vn.edu.ntu.vanquan.model.Product;
 
 public class MainActivity extends AppCompatActivity {
-
+    RecyclerView rvListMH;
+    Adapter adapter ;
+    List <Product>  listProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        addView();
     }
+
+    private void addView()
+    {
+        rvListMH = findViewById(R.id.rvMatHang);
+        rvListMH.setLayoutManager(new LinearLayoutManager(this));
+        ICartContronller contronller = (ICartContronller) getApplication();
+        listProduct = contronller.getALlProduct();
+        adapter = new Adapter(listProduct);
+        rvListMH.setAdapter(adapter);
+    }
+
     private class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtPrice,txtDesc;
         ImageView imvAddToCart;
@@ -32,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             txtName = this.itemView.findViewById(R.id.txtName);
             txtPrice = this.itemView.findViewById(R.id.txtPrice);
             txtDesc = this.itemView.findViewById(R.id.txtDesc);
-            imvAddToCart = this.itemView.findViewById(R.id.imvCart);
+            imvAddToCart = this.itemView.findViewById(R.id.imvAddToCart);
 
         }
         public void bind(Product p)
